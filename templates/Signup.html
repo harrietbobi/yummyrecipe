@@ -50,8 +50,8 @@ footer {
 </div>
 <div class = "div2">
     <a href="/">Home</a>
-    <a class="active" href="{{url_for('Signup')}}">Sign Up</a>
-    <a href="{{url_for('login')}}">Sign In</a>
+    <a class="active" href="{{url_for('sign_up')}}">Sign Up</a>
+    <a href="{{url_for('sign_in')}}">Sign In</a>
     <a href="Recipes.html">Recipes</a>
 	  <a href="form.html">Help</a>
 </div>
@@ -62,11 +62,13 @@ footer {
 <hr>
 <form method="post" action = "">
   <fieldset>
-  Your name:<input type="text" name="fname" placeholder="Your name"><br><br>
+  Your name:<input type="text" name="name" placeholder="Your name"><br><br>
   E-mail:
   <input type="email" name="email"><br><br>
-  User password:
-    <input type="password" name="psw"><br><br>
+  Enter password:
+    <input type="password" name="password"><br><br>
+    Confirm password:
+    <input type="password" name="confirm_password"><br><br>
 	<input type="submit" value="Sign Up">
   </fieldset>
 </form> 

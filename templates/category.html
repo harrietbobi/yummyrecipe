@@ -50,7 +50,7 @@ footer {
 </div>
 <div class = "div2">
     <a href= "{{url_for('main')}}">Home</a>
-    <a class="active" href="{{url_for('addcategory')}}">Category</a>
+    <a class="active" href="{{url_for('create_category')}}">Category</a>
     <a href="View_recipes.html">Recipes</a>
 	<a href="{{url_for('main')}}">Sign Out</a>
 </div>
@@ -59,14 +59,23 @@ footer {
 <p>create Categories:</p>
 
 <hr>
-<form method="post" action = "">
+<form method="POST" action = "{{url_for('create_category')}}">
   Category name:<input type="text" name="title" placeholder="enter Category"><br><br>
   
-                  <input type="submit" value="Add">
+                  <input type="submit" value="Add Category">
 </form>
 <br>
 <br>
 <br>
+
+
+{% for name, category in categories.items() %}
+<ul>
+   <li><h3> {{name}} </h3> </li>
+</ul>  
+{% endfor %}
+
+
 <br>
 <br>
 <br>

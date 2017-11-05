@@ -69,8 +69,8 @@ footer {
 </div>
 <div class = "div2">
     <a class="active" href="homePage.html">Home</a>
-    <a href= "{{url_for('login')}}">Sign In</a>
-    <a href="{{url_for('Signup')}}">Sign Up</a>
+    <a href= "{{url_for('sign_in')}}">Sign In</a>
+    <a href="{{url_for('sign_up')}}">Sign Up</a>
     <a href="Recipes.html">Recipes</a>
 	  <a href="form.html">Help</a>
 </div>
@@ -98,8 +98,10 @@ footer {
   <div class="desc">Share recipes</div>
 </div>
 </div>
-
+<form action = "{{url_for('sign_up')}}">
 <div class = "lower"><input type="submit" value="Sign Up now">
+</div>
+</form>
 <h4>It's free to sign up and save up to 150 recipes.<h4>
 </div>
 
