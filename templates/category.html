@@ -71,7 +71,12 @@ footer {
 
 {% for name, category in categories.items() %}
 <ul>
-   <li><h3> {{name}} </h3> </li>
+   <li><h3> 
+    <a href = "{{url_for('update_category',title = name)}}">{{name}} </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    <a href = "{{url_for('update_category',title = name)}}"><input type="submit" value="Update Category"></a> &nbsp &nbsp &nbsp
+    <a href = "{{url_for('delete_category',title = name)}}"><input type="submit" value="Delete Category"> </a>
+</h3> 
+</li>
 </ul>  
 {% endfor %}
 
