@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,flash,redirect,url_for,session
 from models import User,Category,Recipe
+from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = 'SECRET'
@@ -55,16 +56,16 @@ def sign_up():
             return redirect(url_for('sign_in'))
     return render_template('Signup.html')
 
-# # def login_required(func):
-# #     """ Decorator function to ensure some routes are only accessed by logged in users """
-# #     @wraps(func)
-# #     def decorated_function(*args, **kwargs):
-# #         """ Modified descriprition of the decorated function """
-# #         if not session.get('username'):
-# #             flash('Login to continue', 'warning')
-# #             return redirect(url_for('sign_in', next=request.url))
-# #         return func(*args, **kwargs)
-# #     return decorated_function
+def login_required(func):
+    """ Decorator function to ensure some routes are only accessed by logged in users """
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        """ Modified descriprition of the decorated function """
+        if not session.get('email'):
+            flash('Login to continue', 'warning')
+            return redirect(url_for('sign_in', next=request.url))
+        return func(*args, **kwargs)
+    return decorated_function
 
 @app.route('/category', methods=['GET', 'POST'])
 def category():
@@ -85,6 +86,27 @@ def create_category():
         return redirect(url_for('category'))
     return render_template('category.html')
 
+@app.route('/update_category/<title>', methods=['GET', 'POST'])
+@login_required
+def update_category(title):
+    """ Handles request to update a category """
+    session['category_title'] = title
+    if request.method == 'POST':
+        return_value = USERS[session['email']].edit_category(session['category_title'],
+                                                          request.form['title'])
+        if return_value == True:
+            flash("category updated")
+        return redirect(url_for('category'))
+    return render_template('updatecategory.html')
+
+@app.route('/delete_category/<title>',methods=['GET', 'POST'])
+@login_required
+def delete_category(title):
+    """ Handles request to delete a category"""
+    return_value = USERS[session['email']].delete_category(title)
+    if return_value == True:
+        flash("category deleted")
+    return redirect(url_for('category'))
 
 if __name__ == '__main__':
     app.run(debug= True)
