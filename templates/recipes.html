@@ -50,8 +50,8 @@ footer {
 </div>
 <div class = "div2">
         <a href= "{{url_for('main')}}">Home</a>
-        <a href="{{url_for('addcategory')}}">Category</a>
-        <a class="active" href="{{url_for('addrecipes')}}">Recipes</a>
+        <a href="{{url_for('category')}}">Category</a>
+        <a class="active" href="/view_recipes/{{cat}}">Recipes</a>
         <a href="homePage.html">Sign Out</a>
    
 </div>
@@ -59,17 +59,16 @@ footer {
 <br> 
 <br> 
  
-<h3> You can now add as many Recipes as Want </h3>
+<h3> You can now add as many Recipes as you Want </h3>
 <br> 
 <br> 
 
-<form action="/action_page.php">
+<form method = "POST" action= "{{url_for('add_recipe')}}" >
   <fieldset>
  <br>
  <br>
-  
-  Recipe:<br><br> <br>  <textarea name="message" rows="15" cols="40" required>
-Add recipe name, ingredients and preparation steps
+ Recipe name:&nbsp &nbsp &nbsp <input type="text" name="title" placeholder="enter Recipe" required><br><br>
+ Description:<br><br> <br>  <textarea name="description" placeholder= "Add recipe ingredients and preparation steps" rows="15" cols="40" required>
     </textarea> <br><br><br>
         <input type="submit" value="Add Recipe">
     </fieldset>
@@ -77,7 +76,29 @@ Add recipe name, ingredients and preparation steps
 <br> 
 <br> 
 <br> 
-<br>       
+<hr>   
+<h3 style = "background-color:rgb(190, 190, 190);" >Lists of Recipes under this Category</h3>
+<br> 
+<br> 
+<br>
+<div style="background-color:#ffa31a">
+{% for name, recipe in recipes.items() %}
+<ul>
+   <li>
+<h3>Recipe Name:  {{recipe.recipe_title}} </h3>
+<h3>Descriptions:</h3>   {{name}} <br><br>
+  <input type="submit" value="Update Recipe"> &nbsp &nbsp &nbsp
+  <input type="submit" value="Delete Recipe"> 
+  
+</h3> 
+</li>
+</ul>  
+{% endfor %}
+</div>
+<br> 
+<br> 
+<br> 
+<br>     
  
  
 
