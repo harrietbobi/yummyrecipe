@@ -108,5 +108,50 @@ def delete_category(title):
         flash("category deleted")
     return redirect(url_for('category'))
 
+@app.route('/view_recipes/<category_title>', methods=['GET', 'POST'])
+@login_required
+def view_recipes(category_title):
+    """ Handles displaying recipes """
+    session['current_category_title'] = category_title
+    return render_template('recipes.html', cat="category_title", recipes=USERS[session['email']].categories[category_title].recipes)
+
+@app.route('/add_recipe', methods=['GET', 'POST'])
+@login_required
+def add_recipe():
+    """ Handles new recipe creation requests """
+    if request.method == 'POST':
+        return_value = USERS[session['email']].categories[session['current_category_title']].add_recipe(
+            request.form['title'],request.form["description"])
+        if return_value == True:
+            flash("recipe added successfully")
+        return redirect(url_for('view_recipes', category_title=session['current_category_title']))
+    return render_template('recipes.html', recipes=USERS[session['email']].category[session['current_category_title']].recipess)
+
+# @app.route('/update_recipe/<description>',methods=['GET', 'POST'])
+# @login_required
+# def update_recipe(description):
+#     """ Handles request to update a recipe """
+#     session['description'] = description
+#     if request.method == 'POST':
+#         description_result = (USERS[session['email']].categories[session['current_category_title']].
+#                       update_description(session['description'], request.form['description']))
+#         status_result = (USERS[session['email']].categories[session['current_category_title']].
+#                          update_status(session['description'], request.form['status']))
+#         if des_result == True or status_result == True:
+#             flash('Recipe updated')
+#         return redirect(url_for('view_recipes', category_title=session['current_category_title']))
+#     return render_template('recipeupdate.html', recipe=USERS[session['username']]
+#                            .category[session['current_category_title']].recipes[description],
+#                            recipes=USERS[session['username']].
+#                            categories[session['current_category_title']].recipes)
+# @app.route('/logout')
+# @login_required
+# def logout():
+#     """ logs out users """
+#     session.pop('email')
+#     flash('You have logged out')
+#     return redirect(url_for('main'))
+
+
 if __name__ == '__main__':
     app.run(debug= True)
