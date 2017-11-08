@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head> <title>Category</title>
+<style>
+body {
+     background-color: white;
+}
+#header{
+    padding: 50px;
+    color: white;
+    background-color: black;
+}
+
+.imagefloat {
+             float: left;
+             
+}
+.div1{
+             float: left;
+             width: 50%;
+			 
+}
+a:link, a:visited {
+    background-color: #ffa31a;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+    background-color: red;
+	}
+
+footer {
+    padding: 10px;
+    color: white;
+    background-color: black;
+}
+	  
+</style>
+</head>
+<body>
+
+<div id="header">
+<div class = "div1"> 
+    <img class="imagefloat" src="{{url_for('static',filename = "images/logo.jpg")}}"width="100" height="80" alt="LOGO">
+<h1>Yummy Recipes App</h1>
+</div>
+<div class = "div2">
+    <a href= "{{url_for('main')}}">Home</a>
+    <a class="active" href="{{url_for('create_category')}}">Category</a>
+    <a href="View_recipes.html">Recipes</a>
+	<a href="{{url_for('main')}}">Sign Out</a>
+</div>
+</div>
+<div>
+<p>Update Category:</p>
+
+<hr>
+{% block form %}
+
+<form method="POST" action = " ">
+  Category name:<input type="text" name="title" value="{{ session['category_title'] }}" placeholder="enter Category"><br><br>
+  
+                  <input type="submit" value="Update Category">
+</form>
+
+{% endblock %}
+<br>
+<br>
+<br>
+
+
+
+
+<footer>
+     <i>powered by</i>  <b> InfoClan</b> copy right 2017
+</footer>
+
+</body>
+</html>

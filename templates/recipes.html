@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head> <title>Recipes</title>
+<style>
+body {
+     background-color: white;
+}
+#header{
+    padding: 50px;
+    color: white;
+    background-color: black;
+}
+
+.imagefloat {
+             float: left;
+             
+}
+.div1{
+             float: left;
+             width: 50%;
+			 
+}
+a:link, a:visited {
+    background-color:  #ffa31a;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+    background-color: red;
+	}
+
+footer {
+    padding: 10px;
+    color: white;
+    background-color: black;
+}
+	  
+</style>
+</head>
+<body>
+
+<div id="header">
+<div class = "div1"> 
+<img class="imagefloat" src="{{url_for('static',filename = "images/logo.jpg")}}" width="100" height="80" alt="LOGO">
+<h1>Yummy Recipes App</h1>
+</div>
+<div class = "div2">
+        <a href= "{{url_for('main')}}">Home</a>
+        <a href="{{url_for('category')}}">Category</a>
+        <a class="active" href="/view_recipes/{{cat}}">Recipes</a>
+        <a href="homePage.html">Sign Out</a>
+   
+</div>
+</div>
+<br> 
+<br> 
+ 
+<h3> You can now add as many Recipes as you Want </h3>
+<br> 
+<br> 
+
+<form method = "POST" action= "{{url_for('add_recipe')}}"> 
+ <br>
+ <br>
+ Description:<br><br> <br>  <textarea type="text" name="description"  rows="15" cols="40" required>
+    </textarea> <br><br><br>
+        <input type="submit" value="Add Recipe">
+   
+</form>
+<br> 
+<br> 
+
+<br> 
+<hr>   
+<h3 style = "background-color:rgb(190, 190, 190);" >Lists of Recipes under this Category</h3>
+<br> 
+<br> 
+<br>
+<div style="background-color:#ffa31a">
+{% for name, recipe in recipes.items() %}
+<ul>
+   <li>
+<h3>Descriptions:</h3>    {{name}} <br><br>
+<a href = "{{url_for('update_recipe',description = name)}}"><input type="submit" value="Update Recipe"></a>&nbsp &nbsp &nbsp
+<a href = "{{url_for('delete_recipe',description = name)}}"> <input type="button" value="Delete Recipe"></a>
+  
+</h3> 
+</li>
+</ul>  
+{% endfor %}
+</div>
+<br> 
+<br> 
+<br> 
+<br>     
+ 
+ 
+
+
+
+
+
+<footer>
+     <i>powered by</i>  <b> InfoClan</b> copy right 2017
+</footer>
+
+</body>
+</html>
