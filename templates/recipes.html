@@ -63,18 +63,17 @@ footer {
 <br> 
 <br> 
 
-<form method = "POST" action= "{{url_for('add_recipe')}}" >
-  <fieldset>
+<form method = "POST" action= "{{url_for('add_recipe')}}"> 
  <br>
  <br>
- Recipe name:&nbsp &nbsp &nbsp <input type="text" name="title" placeholder="enter Recipe" required><br><br>
- Description:<br><br> <br>  <textarea name="description" placeholder= "Add recipe ingredients and preparation steps" rows="15" cols="40" required>
+ Description:<br><br> <br>  <textarea type="text" name="description"  rows="15" cols="40" required>
     </textarea> <br><br><br>
         <input type="submit" value="Add Recipe">
-    </fieldset>
+   
 </form>
 <br> 
 <br> 
+
 <br> 
 <hr>   
 <h3 style = "background-color:rgb(190, 190, 190);" >Lists of Recipes under this Category</h3>
@@ -85,10 +84,9 @@ footer {
 {% for name, recipe in recipes.items() %}
 <ul>
    <li>
-<h3>Recipe Name:  {{recipe.recipe_title}} </h3>
-<h3>Descriptions:</h3>   {{name}} <br><br>
-  <input type="submit" value="Update Recipe"> &nbsp &nbsp &nbsp
-  <input type="submit" value="Delete Recipe"> 
+<h3>Descriptions:</h3>    {{name}} <br><br>
+<a href = "{{url_for('update_recipe',description = name)}}"><input type="submit" value="Update Recipe"></a>&nbsp &nbsp &nbsp
+<a href = "{{url_for('delete_recipe',description = name)}}"> <input type="button" value="Delete Recipe"></a>
   
 </h3> 
 </li>
