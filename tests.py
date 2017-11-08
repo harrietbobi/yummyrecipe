@@ -41,33 +41,31 @@ class Recipe_categoryTest(unittest.TestCase):
 
     
     def test_add_recipe_added(self):
-        self.assertEqual(self.recipes.add_recipe("pillawo",'discription'), True)
+        self.assertEqual(self.recipes.add_recipe('description'), True)
 
     def test_add_recipe_exists(self):
-        self.recipes.add_recipe("pillawo",'description')
-        self.assertEqual(self.recipes.add_recipe(
-            "pillawo",'description'), False)
+        self.recipes.add_recipe('description')
+        self.assertEqual(self.recipes.add_recipe('description'), False)
 
     def test_edit_recipe_not_found(self):
         self.assertEqual(self.recipes.edit_recipe(
-            "chicken recipe", "beef recipe"), False)
+            'description', 'new_description'), False)
 
    
     def test_edit_recipe_edited_succesfully(self):
-         self.recipes.add_recipe("pizza",'description')
-         self.assertEqual(self.recipes.edit_recipe("pizza", "chicken"), False)
+         self.recipes.add_recipe('description')
+         self.assertEqual(self.recipes.edit_recipe( 'description', 'new_description'), True)
 
     def test_delete_recipe_not_found(self):
-        self.assertEqual(self.recipes.delete_recipe(
-        "katogo",'description'), False)
+        self.assertEqual(self.recipes.delete_recipe('description'), False)
 
     def test_recipe_deleted(self):
-        self.recipes.add_recipe("katogo",'description')
-        self.assertEqual(self.recipes.delete_recipe("katogo",'description'), True)
+        self.recipes.add_recipe('description')
+        self.assertEqual(self.recipes.delete_recipe('description'), True)
 
 class RecipeTest(unittest.TestCase):
     def setUp(self):
-        self.recipe = Recipe("title","description")
+        self.recipe = Recipe("description")
 
 
     def test_create_item_instance(self):
