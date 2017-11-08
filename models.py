@@ -40,10 +40,10 @@ class Category:
         self.title = title
         self.recipes = {}
 
-    def add_recipe(self, title, description):
+    def add_recipe(self, description):
         """ Adds a new recipe to the categories"""
         if description not in self.recipes:
-            self.recipes[description] = Recipe(title, description)
+            self.recipes[description] = Recipe(description)
             return True
         return False
 
@@ -54,10 +54,10 @@ class Category:
             return True
         return False
 
-    def delete_recipe(self, title, description):
+    def delete_recipe(self, description):
         """ deletes an existing recipe """
         if description in self.recipes:
-            self.recipes.pop(title, description)
+            self.recipes.pop(description)
             return True
         return False
 
@@ -65,6 +65,5 @@ class Category:
 class Recipe:
     """describe the recipe model """
 
-    def __init__(self, title, description):
-        self.recipe_title = title
+    def __init__(self, description):
         self.recipe_description = description
