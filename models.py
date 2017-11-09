@@ -42,7 +42,7 @@ class Category:
 
     def add_recipe(self, description):
         """ Adds a new recipe to the categories"""
-        if description not in self.recipes and title != "":
+        if description not in self.recipes and description != "":
             self.recipes[description] = Recipe(description)
             return True
         return False
