@@ -1,9 +1,11 @@
 from flask import Flask,render_template,request,flash,redirect,url_for,session
 from models import User,Category,Recipe
 from functools import wraps
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 app.secret_key = 'SECRET'
+bootstrap = Bootstrap(app)
 USERS={}
 def register(name, email, password, confirm_password):
     """ This function handles user registration"""
@@ -39,10 +41,10 @@ def sign_in():
         return_value = login(request.form['email'], request.form['password'])
         if return_value == True:
             session['email'] = request.form['email']
+            flash ('log in successful')
             return redirect(url_for('category'))
-            flash ('log in successful', 'warning')
         return redirect(url_for('sign_in'))
-        flash ('incorrect username or password', 'warning')
+        flash ('incorrect username or password')
     return render_template('Signin.html')
 
 @app.route('/sign_up', methods=['GET','POST'])
@@ -136,6 +138,7 @@ def update_recipe(description):
         # print(USERS[session['email']].categories[session['current_category_title']].recipes)
         description_result = (USERS[session['email']].categories[session['current_category_title']].
                       edit_recipe(session['description'], request.form['description']))
+        flash ("Recipe updated successfully")
 
         return redirect(url_for('view_recipes', category_title=session['current_category_title']))
     return render_template('updaterecipe.html', recipes=USERS[session['email']]
