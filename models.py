@@ -13,7 +13,7 @@ class User:
 
     def add_category(self, title):
         """ Adds a new category to the users category"""
-        if title not in self.categories:
+        if title not in self.categories and title != "":
             self.categories[title] = Category(title)
             return True
         return False
@@ -42,7 +42,7 @@ class Category:
 
     def add_recipe(self, description):
         """ Adds a new recipe to the categories"""
-        if description not in self.recipes:
+        if description not in self.recipes and description != "":
             self.recipes[description] = Recipe(description)
             return True
         return False
